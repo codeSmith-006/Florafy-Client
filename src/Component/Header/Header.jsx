@@ -1,10 +1,13 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import logo from "../../assets/web-logo.png";
 import { NavLink } from "react-router-dom";
 import "./active.css";
 
 const Header = () => {
+  // sing in sign up toggle
+  const [userToggle, setUserToggle] = useState(true);
+  console.log(userToggle);
   const { name } = use(AuthContext);
   console.log(name);
   return (
@@ -17,8 +20,7 @@ const Header = () => {
         </div>
       </div>
 
-
-    {/* navigating links */}
+      {/* navigating links */}
       <div className="flex gap-5 text-lg font-medium ml-5 text-[#212121] hidden md:flex">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/explore-gardeners">Explore Gardeners</NavLink>
@@ -26,17 +28,26 @@ const Header = () => {
         <NavLink to="/my-tip">My Tips</NavLink>
       </div>
 
-
-    {/* users profile and login sign up section */}
+      {/* users profile and login sign up section */}
       {/* login/signup */}
       <div>
-          <button
-    class="px-6 py-3 rounded-md text-white font-semibold ml-8 hidden bg-[#38A57E] btn hover:bg-[#2c8c46] transition-colors duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#34A853]"
-  >
-    Login
-  </button>
+        {userToggle ? (
+          <NavLink to="/sign-in" onClick={() => setUserToggle(!userToggle)}>
+            {" "}
+            <button class="px-6 py-3 rounded-md text-white font-semibold ml-8 bg-[#38A57E] btn hover:bg-[#2c8c46] transition-colors duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#34A853]">
+              Login
+            </button>
+          </NavLink>
+        ) : (
+          <NavLink to="/sign-up" onClick={() => setUserToggle(!userToggle)}>
+            {" "}
+            <button class="px-6 py-3 rounded-md text-white font-semibold ml-8 bg-[#38A57E] btn hover:bg-[#2c8c46] transition-colors duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#34A853]">
+              Sign Up
+            </button>
+          </NavLink>
+        )}
       </div>
-      <div className="flex-none ml-8">
+      <div className="flex-none hidden ml-8">
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -55,16 +66,24 @@ const Header = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <NavLink to="/" className='flex md:hidden'>Home</NavLink>
+              <NavLink to="/" className="flex md:hidden">
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/explore-gardeners" className='flex md:hidden'>Explore Gardeners</NavLink>
+              <NavLink to="/explore-gardeners" className="flex md:hidden">
+                Explore Gardeners
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/share-tip" className='flex md:hidden'>Share a Garden Tip</NavLink>
+              <NavLink to="/share-tip" className="flex md:hidden">
+                Share a Garden Tip
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/my-tip" className='flex md:hidden'>My Tips</NavLink>
+              <NavLink to="/my-tip" className="flex md:hidden">
+                My Tips
+              </NavLink>
             </li>
             <li>
               <a>Logout</a>
