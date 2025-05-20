@@ -3,11 +3,13 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { setUserToggle } = use(AuthContext);
+  const { setUserToggle, createAccount } = use(AuthContext);
   const [password, setPassword] = useState("");
   const [view, setView] = useState(false);
+  const [error, setError] = useState('')
   const isPasswordValid =
     /[A-Z]/.test(password) && // at least one uppercase letter
     /[a-z]/.test(password) && // at least one lowercase letter
@@ -21,8 +23,50 @@ const SignUp = () => {
     // get user data from form submit
     const form = event.target;
     const formData = new FormData(form);
-    const userData = Object.fromEntries(formData.entries());
-    console.log(userData);
+    const { email, password, ...rest } = Object.fromEntries(formData.entries());
+    console.log(email, password, rest);
+
+    // integrating firebase create account with email and password
+    createAccount(email, password)
+      .then((userCredential) => {
+        // signup sweet alert
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Signed up successfully",
+        });
+        form.reset();
+        console.log(userCredential.users);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "error",
+          title: `${error}`,
+        });
+      });
   };
 
   return (
@@ -37,7 +81,8 @@ const SignUp = () => {
             <label className="block mb-1 text-sm font-semibold text-[#212121]">
               Name
             </label>
-            <input required
+            <input
+              required
               type="text"
               name="name"
               placeholder="Enter your name"
@@ -49,7 +94,8 @@ const SignUp = () => {
             <label className="block mb-1 text-sm font-semibold text-[#212121]">
               Email
             </label>
-            <input required
+            <input
+              required
               name="email"
               type="email"
               placeholder="Enter your email"
@@ -61,7 +107,8 @@ const SignUp = () => {
             <label className="block mb-1 text-sm font-semibold text-[#212121]">
               Photo URL
             </label>
-            <input required
+            <input
+              required
               name="photo"
               type="text"
               placeholder="Enter photo URL"

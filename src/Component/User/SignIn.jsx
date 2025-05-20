@@ -1,9 +1,113 @@
-import React, { use } from "react";
-import { NavLink } from "react-router-dom";
+import React, { use, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../../Firebase/Firebase.init";
 
 const SignIn = () => {
-  const {setUserToggle} = use(AuthContext)
+  const { setUserToggle, userLogin } = use(AuthContext);
+  const [view, setView] = useState(false);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  // handle login button
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    userLogin(email, password)
+      .then((userCredential) => {
+        // sign in sweet alert
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "User signed in successfully",
+        });
+        form.reset();
+        navigate("/");
+        console.log(userCredential.user);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "error",
+          title: `${error}`,
+        });
+      });
+  };
+
+  // handle google login
+  const handleGoogleLogin = () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((userCredential) => {
+        // sign in with google sweet alert
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "User signed in successfully",
+        });
+        navigate("/");
+        console.log(userCredential.user);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "error",
+          title: `${error}`,
+        });
+      });
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 sm:p-8">
@@ -11,12 +115,13 @@ const SignIn = () => {
           Login to Your Account
         </h2>
 
-        <form className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block mb-1 text-sm font-semibold text-[#212121]">
               Email
             </label>
             <input
+              name="email"
               type="email"
               placeholder="Enter your email"
               className="input input-bordered w-full text-sm"
@@ -27,11 +132,25 @@ const SignIn = () => {
             <label className="block mb-1 text-sm font-semibold text-[#212121]">
               Password
             </label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="input input-bordered w-full text-sm"
-            />
+            <div className="flex items-center">
+              <input
+                type={!view ? "password" : "text"}
+                name="password"
+                className="input w-full"
+                placeholder="Password"
+              />
+              {view ? (
+                <FaEye
+                  onClick={() => setView(!view)}
+                  className="relative cursor-pointer -left-8 text-xl"
+                ></FaEye>
+              ) : (
+                <FaEyeSlash
+                  onClick={() => setView(!view)}
+                  className="relative cursor-pointer -left-8 text-xl"
+                ></FaEyeSlash>
+              )}
+            </div>
           </div>
 
           <button
@@ -42,7 +161,8 @@ const SignIn = () => {
           </button>
           <p className="text-sm text-center text-[#212121] mt-4">
             Don&apos;t have an account?{" "}
-            <NavLink onClick={() => setUserToggle(true)}
+            <NavLink
+              onClick={() => setUserToggle(true)}
               to="/sign-up"
               className="text-[#34A853] font-semibold hover:underline hover:text-[#2c8d47] transition"
             >
@@ -54,6 +174,7 @@ const SignIn = () => {
         <div className="divider">OR</div>
 
         <button
+          onClick={handleGoogleLogin}
           type="button"
           className="btn btn-outline w-full flex items-center justify-center gap-2"
         >
