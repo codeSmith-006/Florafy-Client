@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import logo from "../../assets/web-logo.png";
 import { NavLink } from "react-router-dom";
@@ -6,10 +6,7 @@ import "./active.css";
 
 const Header = () => {
   // sing in sign up toggle
-  const [userToggle, setUserToggle] = useState(true);
-  console.log(userToggle);
-  const { name } = use(AuthContext);
-  console.log(name);
+  const { userToggle, setUserToggle } = use(AuthContext);
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
@@ -22,7 +19,9 @@ const Header = () => {
 
       {/* navigating links */}
       <div className="flex gap-5 text-lg font-medium ml-5 text-[#212121] hidden md:flex">
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/" onClick={() => setUserToggle(true)}>
+          Home
+        </NavLink>
         <NavLink to="/explore-gardeners">Explore Gardeners</NavLink>
         <NavLink to="/share-tip">Share a Garden Tip</NavLink>
         <NavLink to="/my-tip">My Tips</NavLink>
@@ -34,14 +33,14 @@ const Header = () => {
         {userToggle ? (
           <NavLink to="/sign-in" onClick={() => setUserToggle(!userToggle)}>
             {" "}
-            <button class="px-6 py-3 rounded-md text-white font-semibold ml-8 bg-[#38A57E] btn hover:bg-[#2c8c46] transition-colors duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#34A853]">
+            <button className="px-6 py-3 rounded-md text-white font-semibold ml-8 bg-[#38A57E] btn hover:bg-[#2c8c46] transition-colors duration-300 shadow-md">
               Login
             </button>
           </NavLink>
         ) : (
           <NavLink to="/sign-up" onClick={() => setUserToggle(!userToggle)}>
             {" "}
-            <button class="px-6 py-3 rounded-md text-white font-semibold ml-8 bg-[#38A57E] btn hover:bg-[#2c8c46] transition-colors duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#34A853]">
+            <button className="px-6 py-3 rounded-md text-white font-semibold ml-8 bg-[#38A57E] btn hover:bg-[#2c8c46] transition-colors duration-300 shadow-md">
               Sign Up
             </button>
           </NavLink>

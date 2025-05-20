@@ -1,12 +1,14 @@
-import React from 'react';
-import { AuthContext } from './AuthContext';
+import React, { useState } from "react";
+import { AuthContext } from "./AuthContext";
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
+  const [userToggle, setUserToggle] = useState(true);
 
-    const userInfo = {
-        
-    }
-    return <AuthContext value={userInfo}>{children}</AuthContext>
+  const userInfo = {
+    userToggle,
+    setUserToggle
+  };
+  return <AuthContext value={userInfo}>{children}</AuthContext>;
 };
 
 export default AuthProvider;

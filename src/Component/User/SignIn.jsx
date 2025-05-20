@@ -1,6 +1,9 @@
-import React from "react";
+import React, { use } from "react";
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 
 const SignIn = () => {
+  const {setUserToggle} = use(AuthContext)
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 sm:p-8">
@@ -37,6 +40,15 @@ const SignIn = () => {
           >
             Login
           </button>
+          <p className="text-sm text-center text-[#212121] mt-4">
+            Don&apos;t have an account?{" "}
+            <NavLink onClick={() => setUserToggle(true)}
+              to="/sign-up"
+              className="text-[#34A853] font-semibold hover:underline hover:text-[#2c8d47] transition"
+            >
+              Sign up now
+            </NavLink>
+          </p>
         </form>
 
         <div className="divider">OR</div>

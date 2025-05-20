@@ -9,6 +9,7 @@ import AuthProvider from "./Context/AuthProvider.jsx";
 import Home from "./Component/Home.jsx";
 import SignIn from "./Component/User/SignIn.jsx";
 import SignUp from "./Component/User/SignUp.jsx";
+import Error from "./Component/Error.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,9 +27,13 @@ const router = createBrowserRouter([
       {
         path: '/sign-up',
         Component: SignUp
-      }
+      },
     ]
   },
+  {
+    path: "*",
+    Component: Error
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
