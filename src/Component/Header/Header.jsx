@@ -15,13 +15,13 @@ const Header = () => {
     handleSignOut,
     photo,
   } = use(AuthContext);
-  if (loading) {
-    return (
-      <div className="flex justify-center">
-        <span className="loading loading-bars loading-lg"></span>
-      </div>
-    ); // or a spinner
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex justify-center">
+  //       <span className="loading loading-bars loading-lg"></span>
+  //     </div>
+  //   ); // or a spinner
+  // }
   console.log(loggedUser);
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -44,8 +44,8 @@ const Header = () => {
           <NavLink to="/explore-gardeners">Explore Gardeners</NavLink>
           {loggedUser && (
             <div className="flex gap-5 items-center">
-              <NavLink to="/share-tip">Share a Garden Tip</NavLink>
-              <NavLink to="/my-tip">My Tips</NavLink>
+              <NavLink to="/share-tips">Share a Garden Tip</NavLink>
+              <NavLink to="/my-tips">My Tips</NavLink>
             </div>
           )}
         </div>
