@@ -1,26 +1,74 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { auth } from "../Firebase/Firebase.init";
-
+import Swal from "sweetalert2";
 
 const AuthProvider = ({ children }) => {
   const [userToggle, setUserToggle] = useState(true);
-
-
+  const [loggedUser, setLoggedUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   // firebase create account
   const createAccount = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
   // firebase logged account
   const userLogin = (email, password) => {
-    return  signInWithEmailAndPassword(auth, email, password)
-  }
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  // get logged user
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setLoggedUser(user);
+        setLoading(false);
+      } else {
+        setLoggedUser(null);
+        setLoading(false);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // handle signout
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // sign in with google sweet alert
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Sign out successfully",
+        });
+      })
+      .catch(() => {
+        console.log("");
+      });
+  };
   const userInfo = {
     userToggle,
     setUserToggle,
     createAccount,
-    userLogin
+    userLogin,
+    loggedUser,
+    loading,
+    handleSignOut
   };
   return <AuthContext value={userInfo}>{children}</AuthContext>;
 };
