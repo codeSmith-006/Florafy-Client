@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
   const [userToggle, setUserToggle] = useState(true);
   const [loggedUser, setLoggedUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [photo, setPhoto] = useState("https://i.ibb.co/DDHgmBRy/default-profile.png");
   // firebase create account
   const createAccount = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -27,11 +28,11 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setLoggedUser(user);
-        setLoading(false);
+        setPhoto(user.photoURL);
       } else {
         setLoggedUser(null);
-        setLoading(false);
       }
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -68,7 +69,9 @@ const AuthProvider = ({ children }) => {
     userLogin,
     loggedUser,
     loading,
-    handleSignOut
+    handleSignOut,
+    setPhoto,
+    photo
   };
   return <AuthContext value={userInfo}>{children}</AuthContext>;
 };

@@ -3,10 +3,26 @@ import { AuthContext } from "../../Context/AuthContext";
 import logo from "../../assets/web-logo.png";
 import { NavLink } from "react-router-dom";
 import "./active.css";
+import { Tooltip } from "@mui/material";
 
 const Header = () => {
   // sing in sign up toggle
-  const { userToggle, setUserToggle, loggedUser, loading, handleSignOut } = use(AuthContext);
+  const {
+    userToggle,
+    setUserToggle,
+    loggedUser,
+    loading,
+    handleSignOut,
+    photo,
+  } = use(AuthContext);
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    ); // or a spinner
+  }
+  console.log(loggedUser);
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
@@ -34,7 +50,6 @@ const Header = () => {
           )}
         </div>
       )}
-
       {/* users profile and login sign up section */}
       {/* login/signup */}
       {loading ? (
@@ -73,12 +88,11 @@ const Header = () => {
                   role="button"
                   className="btn btn-ghost btn-circle avatar"
                 >
-                  <div className="w-10 rounded-full">
-                    <img
-                      alt="Tailwind CSS Navbar component"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    />
-                  </div>
+                  <Tooltip title={loggedUser.displayName}>
+                    <div className="w-10 rounded-full">
+                      <img alt="Tailwind CSS Navbar component" src={photo} />
+                    </div>
+                  </Tooltip>
                 </div>
                 <ul
                   tabIndex={0}

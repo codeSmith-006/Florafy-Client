@@ -1,35 +1,88 @@
 import React, { use, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../../Firebase/Firebase.init";
 
 const SignUp = () => {
-  const { setUserToggle, createAccount } = use(AuthContext);
+  const { setUserToggle, createAccount, setPhoto } = use(AuthContext);
   const [password, setPassword] = useState("");
   const [view, setView] = useState(false);
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
   const isPasswordValid =
     /[A-Z]/.test(password) && // at least one uppercase letter
     /[a-z]/.test(password) && // at least one lowercase letter
     /[^A-Za-z0-9]/.test(password) && // at least one special character
     password.length >= 8; // minimum 8 characters
 
+  const navigate = useNavigate();
+
   // creating handleSignUp for signup functionality
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
 
     // get user data from form submit
     const form = event.target;
     const formData = new FormData(form);
     const { email, password, ...rest } = Object.fromEntries(formData.entries());
-    console.log(email, password, rest);
 
-    // integrating firebase create account with email and password
-    createAccount(email, password)
+    try {
+      const userCredential = await createAccount(email, password);
+      const user = userCredential.User;
+
+      await updateProfile(auth.currentUser, rest);
+      setPhoto(auth.currentUser.photoURL);
+      navigate("/");
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed up successfully",
+      });
+      form.reset();
+    } catch (error) {
+      console.log(error);
+      setError(error);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: `${error}`,
+      });
+    }
+  };
+  // handle google login
+  const handleGoogleLogin = () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
       .then((userCredential) => {
-        // signup sweet alert
+        // sign in with google sweet alert
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
@@ -43,10 +96,10 @@ const SignUp = () => {
         });
         Toast.fire({
           icon: "success",
-          title: "Signed up successfully",
+          title: "User signed in successfully",
         });
-        form.reset();
-        console.log(userCredential.users);
+        navigate("/");
+        console.log(userCredential.user);
       })
       .catch((error) => {
         console.log(error);
@@ -84,7 +137,7 @@ const SignUp = () => {
             <input
               required
               type="text"
-              name="name"
+              name="displayName"
               placeholder="Enter your name"
               className="input input-bordered w-full text-sm"
             />
@@ -109,7 +162,7 @@ const SignUp = () => {
             </label>
             <input
               required
-              name="photo"
+              name="photoURL"
               type="text"
               placeholder="Enter photo URL"
               className="input input-bordered w-full text-sm"
@@ -172,6 +225,7 @@ const SignUp = () => {
         <div className="divider">OR</div>
 
         <button
+          onClick={handleGoogleLogin}
           type="button"
           className="btn btn-outline w-full flex items-center justify-center gap-2"
         >
