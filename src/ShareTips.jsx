@@ -1,5 +1,6 @@
 import React, { use } from "react";
 import { AuthContext } from "./Context/AuthContext";
+import Swal from "sweetalert2";
 
 const ShareTips = () => {
   const { loggedUser } = use(AuthContext);
@@ -12,20 +13,43 @@ const ShareTips = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     const email = event.target.email.value;
+    const name = event.target.name.value;
     const newData = {
       ...data,
       email,
+      name
     };
 
-    fetch('http://localhost:5000/gardeners-tips',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newData)
+    fetch("http://localhost:5000/gardeners-tips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newData),
     })
-    .then(res => res.json())
-    .then(data => console.log("Data: ", data))
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Data: ", data);
+        if (data.insertedId) {
+          // sign in with google sweet alert
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Shared a tips successfully",
+          });
+          form.reset();
+        }
+      });
   };
   return (
     <div className="max-w-lg mx-auto my-8 w-[95%] bg-white p-8 rounded-lg shadow-md border border-gray-200">
@@ -139,6 +163,7 @@ const ShareTips = () => {
         <div>
           <label className="block font-semibold mb-1">User Name</label>
           <input
+          name="name"
             value={loggedUser?.displayName}
             type="text"
             readOnly

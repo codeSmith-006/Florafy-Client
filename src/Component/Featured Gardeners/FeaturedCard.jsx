@@ -2,7 +2,6 @@ import React from 'react';
 import { FaMapMarkerAlt, FaLeaf } from 'react-icons/fa';
 
 const FeaturedCard = ({singleData}) => {
-    console.log(singleData)
 
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 border border-[#38A57E]/30">

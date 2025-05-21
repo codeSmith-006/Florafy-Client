@@ -17,7 +17,6 @@ const FeaturedGardeners = () => {
     fetchData();
   }, []);
 
-  console.log(data);
 
   return (
     <div>
