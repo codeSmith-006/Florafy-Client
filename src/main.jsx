@@ -14,6 +14,7 @@ import ExploreGarden from "./ExploreGarden.jsx";
 import ShareTips from "./ShareTips.jsx";
 import MyTips from "../MyTips.jsx";
 import PrivateRoutes from "./Component/PrivateRoutes.jsx";
+import BrowseTips from "./BrowseTips.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path: '/browse-tips',
+        Component: BrowseTips
+      }
+
     ],
   },
   {

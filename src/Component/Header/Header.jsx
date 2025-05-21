@@ -22,7 +22,6 @@ const Header = () => {
   //     </div>
   //   ); // or a spinner
   // }
-  console.log(loggedUser);
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
@@ -42,6 +41,7 @@ const Header = () => {
             Home
           </NavLink>
           <NavLink to="/explore-gardeners">Explore Gardeners</NavLink>
+          <NavLink to="/browse-tips">Browse Tips</NavLink>
           {loggedUser && (
             <div className="flex gap-5 items-center">
               <NavLink to="/share-tips">Share a Garden Tip</NavLink>
@@ -107,6 +107,10 @@ const Header = () => {
                     <NavLink to="/explore-gardeners" className="flex md:hidden">
                       Explore Gardeners
                     </NavLink>
+                  </li>
+                  <li className="flex md:hidden">
+                    {" "}
+                    <NavLink to="/browse-tips">Browse Tips</NavLink>
                   </li>
                   <li>
                     <NavLink to="/share-tip" className="flex md:hidden">
