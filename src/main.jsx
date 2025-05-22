@@ -12,7 +12,7 @@ import SignUp from "./Component/User/SignUp.jsx";
 import Error from "./Component/Error.jsx";
 import ExploreGarden from "./ExploreGarden.jsx";
 import ShareTips from "./ShareTips.jsx";
-import MyTips from "../MyTips.jsx";
+import MyTips from "./Component/MyTips/MyTips.jsx";
 import PrivateRoutes from "./Component/PrivateRoutes.jsx";
 import BrowseTips from "./Component/BrowseTips/BrowseTips.jsx";
 import TipsDetails from "./Component/BrowseTips/TipsDetails.jsx";

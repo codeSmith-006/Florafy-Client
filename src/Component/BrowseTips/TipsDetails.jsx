@@ -11,7 +11,9 @@ const TipsDetails = () => {
 
   const handleClickLike = () => {
     setLiked(!liked);
-    setTotalLiked(totalLiked + 1);
+    console.log(liked)
+    const likeValue = liked ? 1 : 0;
+    setTotalLiked(likeValue);
     console.log(totalLiked)
 
     // updating the like with patch
