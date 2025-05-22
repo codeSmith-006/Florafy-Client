@@ -4,9 +4,27 @@ import { Heart, HeartCrack, ArrowLeft } from "lucide-react";
 
 const TipsDetails = () => {
   const [liked, setLiked] = useState(false);
+  const [totalLiked, setTotalLiked] = useState(0);
   const [data, setData] = useState([]);
   const fetchedData = useLoaderData();
   const navigate = useNavigate();
+
+  const handleClickLike = () => {
+    setLiked(!liked);
+    setTotalLiked(totalLiked + 1);
+    console.log(totalLiked)
+
+    // updating the like with patch
+    fetch(`http://localhost:5000/gardeners-tips/${data._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({totalLiked: totalLiked}),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
 
   useEffect(() => {
     setData(fetchedData);
@@ -35,7 +53,7 @@ const TipsDetails = () => {
             className={`btn btn-sm rounded-full px-3 py-2 ${
               liked ? "bg-red-100 text-red-500" : "bg-gray-100 text-gray-500"
             } hover:scale-105 transition`}
-            onClick={() => setLiked(!liked)}
+            onClick={handleClickLike}
             title={liked ? "Unlike" : "Like"}
           >
             {liked ? (
@@ -63,8 +81,8 @@ const TipsDetails = () => {
           {data.availability}
         </p>
         <p className="text-sm text-gray-500 mb-4">
-          <span className="font-medium text-gray-700">Author:</span>{" "}
-          {data.name} ({data.email})
+          <span className="font-medium text-gray-700">Author:</span> {data.name}{" "}
+          ({data.email})
         </p>
 
         <div className="bg-[#f8fefc] border border-[#38A57E]/20 p-5 rounded-lg text-gray-700 leading-relaxed">
