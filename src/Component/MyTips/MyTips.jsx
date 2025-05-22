@@ -3,6 +3,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import MyTipsCard from "./MyTipsCard";
 
 const MyTips = () => {
+  const [deletedTips, setDeletedTips] = useState([]);
   const [myTipData, setMyTipData] = useState([]);
   const { loggedUser } = use(AuthContext);
   console.log(loggedUser);
@@ -18,9 +19,15 @@ const MyTips = () => {
     };
     myTips();
   }, []);
-  const tips = myTipData.filter(
-    (data) => data.email == loggedUser.email
-  );
+  console.log(deletedTips);
+  const tips = myTipData.filter((data) => data.email == loggedUser.email);
+  useEffect(() => {
+    if (deletedTips) {
+      setMyTipData((prevData) =>
+        prevData.filter((data) => data._id !== deletedTips._id)
+      );
+    }
+  }, [deletedTips]);
   console.log(tips);
   return (
     <div className="p-4 rounded-2xl bg-green-50 shadow-md">
@@ -38,7 +45,10 @@ const MyTips = () => {
           </thead>
           <tbody className="divide-y divide-green-100">
             {tips.map((tip) => (
-              <MyTipsCard tip={tip}></MyTipsCard>
+              <MyTipsCard
+                setDeletedTips={setDeletedTips}
+                tip={tip}
+              ></MyTipsCard>
             ))}
             {tips.length === 0 && (
               <tr>
