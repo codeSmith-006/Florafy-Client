@@ -1,24 +1,35 @@
-import React from 'react';
-import { FaMapMarkerAlt, FaLeaf } from 'react-icons/fa';
+import React from "react";
+import { FaUser, FaLeaf, FaVenusMars, FaSeedling } from "react-icons/fa";
+import { GiFarmer, GiPlantRoots } from "react-icons/gi";
 
-const FeaturedCard = ({singleData}) => {
-
+const FeaturedCard = ({ singleData }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 border border-[#38A57E]/30">
+    <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 border border-green-100">
       <img
-        src={singleData.photo}
+        src={singleData.image}
         alt={singleData.name}
-        className="w-full h-48 object-cover"
+        className="w-full h-48 object-cover rounded-xl mb-4"
       />
-      <div className="p-4">
-        <h3 className="text-xl font-semibold text-[#38A57E] mb-1">{singleData.name}</h3>
-        <p className="text-gray-600 text-sm flex items-center gap-2">
-          <FaMapMarkerAlt className="text-[#38A57E]" /> {singleData.location}
-        </p>
-        <p className="text-gray-500 text-sm mt-2 flex items-center gap-2">
-          <FaLeaf className="text-green-500" /> {singleData.bio}
-        </p>
-      </div>
+      <h3 className="text-xl font-semibold text-green-900 flex items-center gap-2">
+        <GiFarmer className="text-green-700" /> {singleData.name}
+      </h3>
+      <p className="text-sm text-gray-700 mt-2 flex items-center gap-2">
+        <FaUser className="text-green-600" /> Age: {singleData.age}
+      </p>
+      <p className="text-sm text-gray-700 mt-1 flex items-center gap-2">
+        <FaVenusMars className="text-green-600" /> Gender: {singleData.gender}
+      </p>
+      <p className="text-sm text-gray-700 mt-1 flex items-center gap-2">
+        <FaLeaf className="text-green-600" /> Status: {singleData.status}
+      </p>
+      <p className="text-sm text-gray-700 mt-1 flex items-center gap-2">
+        <GiPlantRoots className="text-green-600" /> Experience:{" "}
+        {singleData.experience}
+      </p>
+      <p className="text-sm text-gray-700 mt-1 flex items-center gap-2">
+        <FaSeedling className="text-green-600" /> Total Shared Tips:{" "}
+        {singleData.totalSharedTips}
+      </p>
     </div>
   );
 };

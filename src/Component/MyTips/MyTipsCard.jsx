@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 
-const MyTipsCard = ({ tip, setDeletedTips }) => {
+const MyTipsCard = ({ rawTip, setDeletedTips }) => {
   const [activeModal, setActiveModal] = useState(false);
-  const [updatedData, setUpdatedData] = useState([]);
+  const [tip, setTips] = useState(rawTip);
+  console.log(tip)
+  useEffect(() => {
+    setTips(rawTip);
+  }, [rawTip]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    setUpdatedData(data);
+
+    fetch(`http://localhost:5000/gardeners-tips/update/${tip._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(dataResponse => {console.log(dataResponse)
+      const updatedData = {
+        _id: tip._id,
+        ...data
+      }
+      console.log(updatedData)
+      setTips(updatedData)
+      setActiveModal(false)
+    })
   };
 
   const handleDelete = () => {
@@ -33,8 +54,7 @@ const MyTipsCard = ({ tip, setDeletedTips }) => {
         })
           .then((res) => res.json())
           .then((data) => console.log(data));
-
-        setDeletedTips(tip);
+        setDeletedTips(rawTip);
         Swal.fire({
           title: "Deleted!",
           text: "Your file has been deleted.",
@@ -44,18 +64,26 @@ const MyTipsCard = ({ tip, setDeletedTips }) => {
     });
   };
 
-  const handleEdit = () => {
-      console.log(`http://localhost:5000/gardeners-tips/${tip._id}`)
-    fetch(`http://localhost:5000/gardeners-tips/${tip._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
+
+  // const handleEdit = async () => {
+  //   try {
+  //     const response = await fetch(`http://localhost:5000/gardeners-tips/update/${tip._id}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": 'application/json'
+  //       },
+  //       body: JSON.stringify(updatedData)
+  //     })
+  //     const data = await response.json();
+  //     console.log(data)
+  //     if (data.modifiedCount) {
+  //       setTips(updatedData)
+  //       setActiveModal(false)
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   return (
     <tr key={tip._id} className="hover:bg-green-100">
@@ -137,7 +165,7 @@ const MyTipsCard = ({ tip, setDeletedTips }) => {
                   Image URL
                 </label>
                 <input
-                  name="image"
+                  name="imageUrl"
                   type="text"
                   defaultValue={tip?.imageUrl}
                   className="input input-bordered w-full"
@@ -189,9 +217,9 @@ const MyTipsCard = ({ tip, setDeletedTips }) => {
                   </label>
                   <input
                     type="text"
-                    defaultValue={tip?.name}
+                    name="name"
+                    value={tip?.name}
                     className="input input-bordered w-full bg-gray-100 text-gray-600"
-                    readOnly
                   />
                 </div>
                 <div className="flex-1">
@@ -200,17 +228,16 @@ const MyTipsCard = ({ tip, setDeletedTips }) => {
                   </label>
                   <input
                     type="text"
-                    defaultValue={tip?.email}
+                    name="email"
+                    value={tip?.email}
                     className="input input-bordered w-full bg-gray-100 text-gray-600"
-                    readOnly
                   />
                 </div>
               </div>
 
               {/* Buttons */}
               <div className="modal-action mt-6">
-                <button
-                  onClick={handleEdit}
+                <button type="submit"
                   className="btn btn-success text-white"
                 >
                   Update

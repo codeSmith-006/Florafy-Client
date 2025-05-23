@@ -9,26 +9,36 @@ const TipsDetails = () => {
   const fetchedData = useLoaderData();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setData(fetchedData);
+  }, [fetchedData]);
+
+  fetch(`http://localhost:5000/gardeners-tips/${data._id}`)
+    .then((res) => res.json())
+    .then((resData) => setTotalLiked(resData.likeCount));
+
   const handleClickLike = () => {
-    setLiked(!liked);
+    setLiked(true);
     const likeValue = liked ? 1 : 0;
     setTotalLiked(likeValue);
 
     // updating the like with patch
-    fetch(`http://localhost:5000/gardeners-tips/${data._id}`, {
+    fetch(`http://localhost:5000/gardeners-tips/like/${data._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({totalLiked: totalLiked}),
+      body: JSON.stringify({ totalLiked: totalLiked + 1 }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((resData) => {console.log(resData)
+        setTotalLiked(data.likeCount);
+        location.reload()
+      });
   };
+  console.log(data.likeCount)
 
-  useEffect(() => {
-    setData(fetchedData);
-  }, [fetchedData]);
+  // fetching current data
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -50,17 +60,13 @@ const TipsDetails = () => {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-3xl font-bold text-[#38A57E]">{data.title}</h2>
           <button
-            className={`btn btn-sm rounded-full px-3 py-2 ${
-              liked ? "bg-red-100 text-red-500" : "bg-gray-100 text-gray-500"
-            } hover:scale-105 transition`}
+            disabled={liked}
+            className={`btn btn-sm rounded-full px-3 py-2 
+              bg-red-100 text-red-500
+             hover:scale-105 transition`}
             onClick={handleClickLike}
-            title={liked ? "Unlike" : "Like"}
           >
-            {liked ? (
-              <Heart className="w-5 h-5 fill-red-500" />
-            ) : (
-              <HeartCrack className="w-5 h-5" />
-            )}
+            <Heart className="w-5 h-5 fill-red-500" />
           </button>
         </div>
 

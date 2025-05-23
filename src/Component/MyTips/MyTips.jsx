@@ -6,7 +6,6 @@ const MyTips = () => {
   const [deletedTips, setDeletedTips] = useState([]);
   const [myTipData, setMyTipData] = useState([]);
   const { loggedUser } = use(AuthContext);
-  console.log(loggedUser);
   useEffect(() => {
     const myTips = async () => {
       try {
@@ -19,7 +18,6 @@ const MyTips = () => {
     };
     myTips();
   }, []);
-  console.log(deletedTips);
   const tips = myTipData.filter((data) => data.email == loggedUser.email);
   useEffect(() => {
     if (deletedTips) {
@@ -29,7 +27,7 @@ const MyTips = () => {
     }
   }, [deletedTips]);
   return (
-    <div className="p-4 rounded-2xl bg-green-50 shadow-md">
+    <div className="p-4 rounded-2xl bg-white shadow-md">
       <h2 className="text-xl font-bold mb-4 text-green-800">My Garden Tips</h2>
       <div className="overflow-x-auto rounded-lg">
         <table className="min-w-full text-sm border border-green-200">
@@ -46,7 +44,7 @@ const MyTips = () => {
             {tips.map((tip) => (
               <MyTipsCard
                 setDeletedTips={setDeletedTips}
-                tip={tip}
+                rawTip={tip}
               ></MyTipsCard>
             ))}
             {tips.length === 0 && (
