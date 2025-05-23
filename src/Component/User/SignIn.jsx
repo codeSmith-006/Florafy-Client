@@ -40,7 +40,6 @@ const SignIn = () => {
         });
         form.reset();
         navigate("/");
-        console.log(userCredential.user);
       })
       .catch((error) => {
         console.log(error);
@@ -86,10 +85,8 @@ const SignIn = () => {
           title: "User signed in successfully",
         });
         navigate("/");
-        console.log(userCredential.user);
       })
       .catch((error) => {
-        console.log(error);
         setError(error);
         const Toast = Swal.mixin({
           toast: true,

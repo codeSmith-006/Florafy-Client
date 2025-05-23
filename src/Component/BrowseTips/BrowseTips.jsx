@@ -15,7 +15,6 @@ const BrowseTips = () => {
     };
     myTips();
   }, []);
-  console.log(myTipData);
   return (
     <div className="w-[95%] md:w-full mx-auto my-6">
       <h2 className="text-4xl font-bold text-center text-[#38A57E] mb-10">

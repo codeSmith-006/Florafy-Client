@@ -4,6 +4,15 @@ import Swal from "sweetalert2";
 
 const MyTipsCard = ({ tip, setDeletedTips }) => {
   const [activeModal, setActiveModal] = useState(false);
+  const [updatedData, setUpdatedData] = useState([]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    setUpdatedData(data);
+  };
 
   const handleDelete = () => {
     Swal.fire({
@@ -33,8 +42,21 @@ const MyTipsCard = ({ tip, setDeletedTips }) => {
         });
       }
     });
-    console.log(`http://localhost:5000/gardeners-tips/${tip._id}`);
   };
+
+  const handleEdit = () => {
+      console.log(`http://localhost:5000/gardeners-tips/${tip._id}`)
+    fetch(`http://localhost:5000/gardeners-tips/${tip._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <tr key={tip._id} className="hover:bg-green-100">
       {activeModal && (
@@ -48,7 +70,7 @@ const MyTipsCard = ({ tip, setDeletedTips }) => {
               Update Garden Tip
             </h3>
 
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               {/* Title */}
               <div>
                 <label className="label font-medium text-green-700">
@@ -187,7 +209,12 @@ const MyTipsCard = ({ tip, setDeletedTips }) => {
 
               {/* Buttons */}
               <div className="modal-action mt-6">
-                <button className="btn btn-success text-white">Update</button>
+                <button
+                  onClick={handleEdit}
+                  className="btn btn-success text-white"
+                >
+                  Update
+                </button>
                 <button
                   type="button"
                   className="btn"

@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 const TipsTable = ({ data }) => {
     // sending data to specific id api
     const handleViewDetails = () => {
-        console.log(`http://localhost:5000/gardeners-tips/${data._id}`)
         fetch(`http://localhost:5000/gardeners-tips/${data._id}`, {
             method: "GET"
         })

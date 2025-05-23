@@ -99,7 +99,6 @@ const SignUp = () => {
           title: "User signed in successfully",
         });
         navigate("/");
-        console.log(userCredential.user);
       })
       .catch((error) => {
         console.log(error);

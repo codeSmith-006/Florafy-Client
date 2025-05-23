@@ -28,7 +28,6 @@ const MyTips = () => {
       );
     }
   }, [deletedTips]);
-  console.log(tips);
   return (
     <div className="p-4 rounded-2xl bg-green-50 shadow-md">
       <h2 className="text-xl font-bold mb-4 text-green-800">My Garden Tips</h2>

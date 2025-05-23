@@ -11,10 +11,8 @@ const TipsDetails = () => {
 
   const handleClickLike = () => {
     setLiked(!liked);
-    console.log(liked)
     const likeValue = liked ? 1 : 0;
     setTotalLiked(likeValue);
-    console.log(totalLiked)
 
     // updating the like with patch
     fetch(`http://localhost:5000/gardeners-tips/${data._id}`, {

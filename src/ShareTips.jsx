@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 
 const ShareTips = () => {
   const { loggedUser } = use(AuthContext);
-  console.log(loggedUser);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,7 +28,6 @@ const ShareTips = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Data: ", data);
         if (data.insertedId) {
           // sign in with google sweet alert
           const Toast = Swal.mixin({
