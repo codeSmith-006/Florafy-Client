@@ -34,7 +34,9 @@ const Header = () => {
 
       {/* navigating links */}
       {loading ? (
-        <span className="loading loading-bars loading-lg"></span>
+        <div className="flex justify-center">
+          <span className="loading loading-bars loading-lg"></span>
+        </div>
       ) : (
         <div className="flex gap-5 text-lg font-medium ml-5 text-[#212121] hidden md:flex">
           <NavLink to="/" onClick={() => setUserToggle(true)}>

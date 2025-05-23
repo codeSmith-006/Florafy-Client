@@ -6,12 +6,14 @@ const MyTips = () => {
   const [deletedTips, setDeletedTips] = useState([]);
   const [myTipData, setMyTipData] = useState([]);
   const { loggedUser } = use(AuthContext);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const myTips = async () => {
       try {
         const response = await fetch("http://localhost:5000/gardeners-tips");
         const data = await response.json();
         setMyTipData(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -25,7 +27,16 @@ const MyTips = () => {
         prevData.filter((data) => data._id !== deletedTips._id)
       );
     }
+    setLoading(false);
   }, [deletedTips]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
   return (
     <div className="p-4 rounded-2xl bg-white shadow-md">
       <h2 className="text-xl font-bold mb-4 text-green-800">My Garden Tips</h2>

@@ -5,6 +5,7 @@ const BrowseTips = () => {
   const [myTipData, setMyTipData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const myTips = async () => {
@@ -15,6 +16,7 @@ const BrowseTips = () => {
           (data) => data.availability != "Hidden"
         );
         setMyTipData(filteredData);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -30,8 +32,16 @@ const BrowseTips = () => {
         (tip) => tip.difficulty == selectedDifficulty
       );
       setFilteredData(difficultyData);
+      setLoading(false);
     }
   }, [myTipData, selectedDifficulty]);
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
 
   console.log(filteredData);
   return (
