@@ -3,6 +3,7 @@ import FeaturedCard from "./FeaturedCard";
 
 const FeaturedGardeners = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true)
   // fetching data
   useEffect(() => {
     const fetchData = async () => {
@@ -10,12 +11,21 @@ const FeaturedGardeners = () => {
         const response = await fetch("http://localhost:5000/gardeners-active");
         const data = await (await response).json();
         setData(data);
+        setLoading(false)
       } catch (error) {
         console.log(error.message);
       }
     };
     fetchData();
   }, []);
+
+    if (loading) {
+    return (
+      <div className="flex justify-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
 
 
   return (
