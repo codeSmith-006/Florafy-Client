@@ -4,6 +4,7 @@ import logo from "../../assets/web-logo.png";
 import { NavLink } from "react-router-dom";
 import "./active.css";
 import { Tooltip } from "@mui/material";
+import ModeToggle from "../DarkMode/DarkModeToggle";
 
 const Header = () => {
   // sing in sign up toggle
@@ -23,12 +24,16 @@ const Header = () => {
   //   ); // or a spinner
   // }
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm dark:bg-[#1f2937] dark:text-white"
+>
       <div className="flex-1">
         {/* logo */}
         <div className="flex text-4xl font-medium items-center">
           <img className="w-18" src={logo} alt="" />
           <a href="/">Florafy</a>
+          <div className="ml-3">
+            <ModeToggle></ModeToggle>
+          </div>
         </div>
       </div>
 
