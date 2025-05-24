@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import "./active.css";
 import { Tooltip } from "@mui/material";
 import ModeToggle from "../DarkMode/DarkModeToggle";
+import Florafy from "../Florafy";
 
 const Header = () => {
   // sing in sign up toggle
@@ -24,14 +25,13 @@ const Header = () => {
   //   ); // or a spinner
   // }
   return (
-    <div className="navbar bg-base-100 dark:bg-gray-900 shadow-sm"
->
+    <div className="navbar bg-base-100 dark:bg-gray-900 shadow-sm">
       <div className="flex-1">
         {/* logo */}
         <div className="flex text-4xl dark:text-gray-100 font-medium items-center">
           <img className="w-18" src={logo} alt="" />
-          <a href="/">Florafy</a>
-          <div className="ml-3">
+          <a href="/"><Florafy></Florafy></a>
+          <div className="ml-3 hidden md:flex">
             <ModeToggle></ModeToggle>
           </div>
         </div>
@@ -88,51 +88,60 @@ const Header = () => {
               )}
             </div>
           ) : (
-            <div className="flex-none ml-8">
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-                >
-                  <Tooltip title={loggedUser.displayName}>
-                    <div className="w-10 rounded-full">
-                      <img alt="Tailwind CSS Navbar component" src={photo} />
-                    </div>
-                  </Tooltip>
+            <div>
+              {" "}
+              <div className="flex  items-center gap-2 ml-8">
+                <div className="ml-3 md:hidden flex ">
+                  <ModeToggle></ModeToggle>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content dark:text-white bg-base-100 dark:bg-gray-900 rounded-box z-1 mt-3 w-52 p-2 shadow"
-                >
-                  <li>
-                    <NavLink to="/" className="flex md:hidden">
-                      Home
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/explore-gardeners" className="flex md:hidden">
-                      Explore Gardeners
-                    </NavLink>
-                  </li>
-                  <li className="flex md:hidden">
-                    {" "}
-                    <NavLink to="/browse-tips">Browse Tips</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/share-tip" className="flex md:hidden">
-                      Share a Garden Tip
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/my-tip" className="flex md:hidden">
-                      My Tips
-                    </NavLink>
-                  </li>
-                  <li onClick={handleSignOut}>
-                    <a>Logout</a>
-                  </li>
-                </ul>
+                <div className="dropdown dropdown-end">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <Tooltip title={loggedUser.displayName}>
+                      <div className="w-10 rounded-full">
+                        <img alt="Tailwind CSS Navbar component" src={photo} />
+                      </div>
+                    </Tooltip>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content dark:text-white bg-base-100 dark:bg-gray-900 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                  >
+                    <li>
+                      <NavLink to="/" className="flex md:hidden">
+                        Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/explore-gardeners"
+                        className="flex md:hidden"
+                      >
+                        Explore Gardeners
+                      </NavLink>
+                    </li>
+                    <li className="flex md:hidden">
+                      {" "}
+                      <NavLink to="/browse-tips">Browse Tips</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/share-tip" className="flex md:hidden">
+                        Share a Garden Tip
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/my-tip" className="flex md:hidden">
+                        My Tips
+                      </NavLink>
+                    </li>
+                    <li onClick={handleSignOut}>
+                      <a>Logout</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           )}

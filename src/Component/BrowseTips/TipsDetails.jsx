@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Heart, HeartCrack, ArrowLeft } from "lucide-react";
+import { AiFillLike } from "react-icons/ai";
 
 const TipsDetails = () => {
   const [liked, setLiked] = useState(false);
@@ -94,6 +95,13 @@ const TipsDetails = () => {
             Visibility:
           </span>{" "}
           {data.availability}
+        </p>
+        <p className="text-sm text-gray-500 mb-1 dark:text-gray-400 flex items-center gap-1">
+          <AiFillLike className="text-blue-600 dark:text-blue-400" />
+          <span className="font-medium text-gray-700 dark:text-gray-300">
+            Total Likes:
+          </span>{" "}
+          {totalLiked ? totalLiked : 0}
         </p>
         <p className="text-sm text-gray-500 mb-4 dark:text-gray-400">
           <span className="font-medium text-gray-700 dark:text-gray-300">

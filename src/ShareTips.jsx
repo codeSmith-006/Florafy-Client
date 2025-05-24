@@ -17,6 +17,7 @@ const ShareTips = () => {
       ...data,
       email,
       name,
+      likeCount: 0
     };
 
     fetch("http://localhost:5000/gardeners-tips", {

@@ -31,7 +31,7 @@ const TipsTable = ({ data }) => {
         <NavLink to={`/browse-tips/${data._id}`}>
           <button
             onClick={handleViewDetails}
-            className="btn btn-sm text-center mx-auto bg-[#38A57E] hover:bg-[#2f7a60] text-white flex items-center gap-2 dark:bg-green-600 dark:hover:bg-green-500"
+            className="btn btn-sm text-center mx-auto bg-[#38A57E] hover:bg-[#2f7a60] text-white flex items-center gap-2 dark:bg-[#38A57E] dark:hover:bg-green-500"
           >
             <Eye className="w-4 h-4" /> See More
           </button>
