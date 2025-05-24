@@ -10,7 +10,7 @@ const BrowseTips = () => {
   useEffect(() => {
     const myTips = async () => {
       try {
-        const response = await fetch("http://localhost:5000/gardeners-tips");
+        const response = await fetch("https://florafy-server.vercel.app/gardeners-tips");
         const data = await response.json();
         const filteredData = data.filter(
           (data) => data.availability != "Hidden"
@@ -39,7 +39,7 @@ const BrowseTips = () => {
   if (loading) {
     return (
       <div className="flex justify-center">
-        <span className="loading loading-bars loading-lg"></span>
+        <span className="loading dark:text-white loading-bars loading-lg"></span>
       </div>
     );
   }
@@ -91,7 +91,7 @@ const BrowseTips = () => {
           </thead>
           <tbody>
             {filteredData.length != 0 ? (
-              filteredData.map((data) => <TipsTable data={data}></TipsTable>)
+              filteredData.map((data) => <TipsTable key={data._id} data={data}></TipsTable>)
             ) : (
               <tr>
                 <td colSpan="6" className="text-center py-10 text-green-700 dark:text-green-300">

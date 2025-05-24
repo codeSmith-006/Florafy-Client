@@ -9,7 +9,7 @@ const FeaturedGardeners = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/gardeners-active");
+        const response = await fetch("https://florafy-server.vercel.app/gardeners-active");
         const data = await (await response).json();
         setData(data);
         setLoading(false);
@@ -23,7 +23,7 @@ const FeaturedGardeners = () => {
   if (loading) {
     return (
       <div className="flex justify-center dark:text-white">
-        <span className="loading loading-bars loading-lg"></span>
+        <span className="loading dark:text-white loading-bars loading-lg"></span>
       </div>
     );
   }

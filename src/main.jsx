@@ -61,7 +61,7 @@ const router = createBrowserRouter([
       {
         path: "/browse-tips/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/gardeners-tips/${params.id}`),
+          fetch(`https://florafy-server.vercel.app/gardeners-tips/${params.id}`),
         element: (
           <PrivateRoutes>
             <TipsDetails></TipsDetails>

@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { Heart, HeartCrack, ArrowLeft } from "lucide-react";
+import { Heart, ArrowLeft } from "lucide-react";
 import { AiFillLike } from "react-icons/ai";
 
 const TipsDetails = () => {
+  const fetchedData = useLoaderData();
   const [liked, setLiked] = useState(false);
   const [totalLiked, setTotalLiked] = useState(0);
   const [data, setData] = useState([]);
-  const fetchedData = useLoaderData();
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    setData(fetchedData);
-  }, [fetchedData]);
+    const loadData = async () => {
+      if (!fetchedData?._id) return;
 
-  fetch(`http://localhost:5000/gardeners-tips/${data._id}`)
-    .then((res) => res.json())
-    .then((resData) => setTotalLiked(resData.likeCount));
+      setData(fetchedData); // state update is asynchronous, but we can still safely use fetchedData directly
+
+      try {
+        const res = await fetch(
+          `https://florafy-server.vercel.app/gardeners-tips/${fetchedData._id}`
+        );
+        const resData = await res.json();
+        setTotalLiked(resData.likeCount);
+      } catch (err) {
+        console.error("Error fetching like count:", err);
+      }
+    };
+
+    loadData();
+  }, [fetchedData]);
 
   const handleClickLike = () => {
     setLiked(true);
@@ -24,7 +37,7 @@ const TipsDetails = () => {
     setTotalLiked(likeValue);
 
     // updating the like with patch
-    fetch(`http://localhost:5000/gardeners-tips/like/${data._id}`, {
+    fetch(`https://florafy-server.vercel.app/gardeners-tips/like/${data._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -16,18 +16,18 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    fetch(`http://localhost:5000/gardeners-tips/update/${tip._id}`, {
+    fetch(`https://florafy-server.vercel.app/gardeners-tips/update/${tip._id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(dataResponse => {
+      .then((res) => res.json())
+      .then((dataResponse) => {
         const updatedData = {
           _id: tip._id,
-          ...data
+          ...data,
         };
         setTips(updatedData);
         setActiveModal(false);
@@ -45,7 +45,7 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/gardeners-tips/${tip._id}`, {
+        fetch(`https://florafy-server.vercel.app/gardeners-tips/${tip._id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
   };
 
   return (
-    <tr key={tip._id} className="hover:bg-green-100 dark:hover:bg-green-900">
+    <>
       {activeModal && (
         <dialog
           id="update_modal"
@@ -233,30 +233,31 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
           </div>
         </dialog>
       )}
-
-      <td className="px-4 py-2 dark:text-white">{tip.title}</td>
-      <td className="px-4 py-2 dark:text-white">{tip.plantType}</td>
-      <td className="px-4 py-2 dark:text-white">{tip.difficulty}</td>
-      <td className="px-4 py-2 dark:text-white">{tip.availability}</td>
-      <td className="px-4 py-2 text-center">
-        <div className="flex justify-center gap-3">
-          <button
-            onClick={() => setActiveModal(!activeModal)}
-            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition"
-            title="Edit Tip"
-          >
-            <Pencil className="w-5 h-5 cursor-pointer" />
-          </button>
-          <button
-            onClick={handleDelete}
-            className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 transition"
-            title="Delete Tip"
-          >
-            <Trash2 className="w-5 h-5 cursor-pointer" />
-          </button>
-        </div>
-      </td>
-    </tr>
+      <tr key={tip._id} className="hover:bg-green-100 dark:hover:bg-green-900">
+        <td className="px-4 py-2 dark:text-white">{tip.title}</td>
+        <td className="px-4 py-2 dark:text-white">{tip.plantType}</td>
+        <td className="px-4 py-2 dark:text-white">{tip.difficulty}</td>
+        <td className="px-4 py-2 dark:text-white">{tip.availability}</td>
+        <td className="px-4 py-2 text-center">
+          <div className="flex justify-center gap-3">
+            <button
+              onClick={() => setActiveModal(!activeModal)}
+              className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition"
+              title="Edit Tip"
+            >
+              <Pencil className="w-5 h-5 cursor-pointer" />
+            </button>
+            <button
+              onClick={handleDelete}
+              className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 transition"
+              title="Delete Tip"
+            >
+              <Trash2 className="w-5 h-5 cursor-pointer" />
+            </button>
+          </div>
+        </td>
+      </tr>
+    </>
   );
 };
 

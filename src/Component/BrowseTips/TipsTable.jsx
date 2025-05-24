@@ -4,16 +4,28 @@ import { NavLink } from "react-router-dom";
 
 const TipsTable = ({ data }) => {
   // sending data to specific id api
-  const handleViewDetails = () => {
-    fetch(`http://localhost:5000/gardeners-tips/${data._id}`, {
-      method: "GET"
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
+  const handleViewDetails = async () => {
+    if (!data?._id) {
+      console.warn("Invalid or missing ID:", data);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://florafy-server.vercel.app/gardeners-tips/${data._id}`
+      );
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
   };
 
   return (
-    <tr key={data.id} className="hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800 transition">
+    <tr
+      key={data.id}
+      className="hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800 transition"
+    >
       <td className="border border-gray-200 dark:border-gray-700 p-3">
         <img
           src={data.imageUrl}

@@ -20,7 +20,7 @@ const ShareTips = () => {
       likeCount: 0
     };
 
-    fetch("http://localhost:5000/gardeners-tips", {
+    fetch("https://florafy-server.vercel.app/gardeners-tips", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -20,7 +20,7 @@ const Header = () => {
   // if (loading) {
   //   return (
   //     <div className="flex justify-center">
-  //       <span className="loading loading-bars loading-lg"></span>
+  //       <span className="loading dark:text-white loading-bars loading-lg"></span>
   //     </div>
   //   ); // or a spinner
   // }
@@ -40,7 +40,7 @@ const Header = () => {
       {/* navigating links */}
       {loading ? (
         <div className="flex justify-center">
-          <span className="loading loading-bars loading-lg"></span>
+          <span className="loading dark:text-white loading-bars loading-lg"></span>
         </div>
       ) : (
         <div className="flex dark:text-gray-100 gap-5 text-lg font-medium ml-5 text-[#212121] hidden md:flex">
@@ -60,7 +60,7 @@ const Header = () => {
       {/* users profile and login sign up section */}
       {/* login/signup */}
       {loading ? (
-        <span className="loading loading-bars loading-lg"></span>
+        <span className="loading dark:text-white loading-bars loading-lg"></span>
       ) : (
         <div>
           {!loggedUser ? (
@@ -128,12 +128,12 @@ const Header = () => {
                       <NavLink to="/browse-tips">Browse Tips</NavLink>
                     </li>
                     <li>
-                      <NavLink to="/share-tip" className="flex md:hidden">
+                      <NavLink to="/share-tips" className="flex md:hidden">
                         Share a Garden Tip
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/my-tip" className="flex md:hidden">
+                      <NavLink to="/my-tips" className="flex md:hidden">
                         My Tips
                       </NavLink>
                     </li>

@@ -9,7 +9,7 @@ const ExploreGarden = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/all-gardeners");
+        const response = await fetch("https://florafy-server.vercel.app/all-gardeners");
         const data = await response.json();
         setData(data);
         setLoading(false);
@@ -22,7 +22,7 @@ const ExploreGarden = () => {
   if (loading) {
     return (
       <div className="flex justify-center">
-        <span className="loading loading-bars loading-lg"></span>
+        <span className="loading dark:text-white loading-bars loading-lg"></span>
       </div>
     );
   }
@@ -35,7 +35,7 @@ const ExploreGarden = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {data.map((gardener) => (
-          <ExploreGardenersCard gardener={gardener}></ExploreGardenersCard>
+          <ExploreGardenersCard key={gardener._id} gardener={gardener}></ExploreGardenersCard>
         ))}
       </div>
     </div>

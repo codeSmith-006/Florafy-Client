@@ -5,7 +5,7 @@ const TrendingTipCard = () => {
   const [topTips, setTopTips] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/top-trending')
+    fetch('https://florafy-server.vercel.app/top-trending')
       .then(res => res.json())
       .then(resData => setTopTips(resData));
   }, []);
