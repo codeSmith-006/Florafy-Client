@@ -19,7 +19,6 @@ const ExploreGarden = () => {
     };
     fetchData();
   }, []);
-  console.log(data);
   if (loading) {
     return (
       <div className="flex justify-center">

@@ -44,7 +44,6 @@ const BrowseTips = () => {
     );
   }
 
-  console.log(filteredData);
   return (
     <div className="w-[95%] md:w-full mx-auto my-6">
       <h2 className="text-4xl font-bold text-center text-[#38A57E] dark:text-green-300 mb-10">
