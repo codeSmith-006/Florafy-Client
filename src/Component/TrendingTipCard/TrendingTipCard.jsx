@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import TopTips from './TopTips';
 
-
 const TrendingTipCard = () => {
-    const [topTips, setTopTips] = useState([])
-    useEffect(() => {
-        fetch('http://localhost:5000/top-trending')
-        .then(res => res.json())
-        .then(resData => setTopTips(resData))
-    }, [])
-return (
+  const [topTips, setTopTips] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/top-trending')
+      .then(res => res.json())
+      .then(resData => setTopTips(resData));
+  }, []);
+
+  return (
     <section className="my-10 px-4">
-      <h2 className="text-2xl sm:text-3xl font-bold text-green-800 mb-6 text-center">
+      <h2 className="text-2xl sm:text-3xl font-bold text-green-800 dark:text-green-300 mb-6 text-center">
         🌿 Top Trending Garden Tips
       </h2>
 
@@ -22,7 +23,7 @@ return (
           ))}
         </div>
       ) : (
-        <p className="text-center text-green-700 font-medium">
+        <p className="text-center text-green-700 dark:text-green-400 font-medium">
           No trending tips found.
         </p>
       )}

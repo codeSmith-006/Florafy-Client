@@ -24,11 +24,11 @@ const Header = () => {
   //   ); // or a spinner
   // }
   return (
-    <div className="navbar bg-base-100 shadow-sm dark:bg-[#1f2937] dark:text-white"
+    <div className="navbar bg-base-100 dark:bg-gray-900 shadow-sm"
 >
       <div className="flex-1">
         {/* logo */}
-        <div className="flex text-4xl font-medium items-center">
+        <div className="flex text-4xl dark:text-gray-100 font-medium items-center">
           <img className="w-18" src={logo} alt="" />
           <a href="/">Florafy</a>
           <div className="ml-3">
@@ -43,7 +43,7 @@ const Header = () => {
           <span className="loading loading-bars loading-lg"></span>
         </div>
       ) : (
-        <div className="flex gap-5 text-lg font-medium ml-5 text-[#212121] hidden md:flex">
+        <div className="flex dark:text-gray-100 gap-5 text-lg font-medium ml-5 text-[#212121] hidden md:flex">
           <NavLink to="/" onClick={() => setUserToggle(true)}>
             Home
           </NavLink>
@@ -103,7 +103,7 @@ const Header = () => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                  className="menu menu-sm dropdown-content dark:text-white bg-base-100 dark:bg-gray-900 rounded-box z-1 mt-3 w-52 p-2 shadow"
                 >
                   <li>
                     <NavLink to="/" className="flex md:hidden">

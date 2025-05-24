@@ -11,7 +11,7 @@ import logo from "../assets/web-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1D1D1D] text-white py-10 px-6 lg:px-20">
+    <footer className="bg-[#1D1D1D] dark:bg-[#101828] text-white py-10 px-6 lg:px-20">
       <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
         {/* Logo and About */}
         <div className="text-center lg:text-left">

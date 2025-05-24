@@ -29,8 +29,8 @@ const ExploreGarden = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen py-10 px-4 lg:px-20">
-      <h2 className="text-4xl font-bold text-center text-green-800 mb-12">
+    <div className="bg-white dark:bg-[#101828] min-h-screen py-10 px-4 lg:px-20">
+      <h2 className="text-4xl font-bold text-center text-green-800 dark:text-[#38A57E] mb-12">
         🌱 Explore Our Gardeners
       </h2>
 

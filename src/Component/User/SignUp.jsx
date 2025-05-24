@@ -122,15 +122,15 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#212121] mb-6">
+    <div className="min-h-screen flex dark:hover:shadow-2xl items-center justify-center bg-gray-100 dark:bg-[#101828] px-4 py-10">
+      <div className="w-full max-w-md bg-white dark:bg-[#0E1A2B] rounded-2xl shadow-lg p-6 sm:p-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#212121] dark:text-white mb-6">
           Sign Up for an Account
         </h2>
 
         <form onSubmit={handleSignUp} className="space-y-4">
           <div>
-            <label className="block mb-1 text-sm font-semibold text-[#212121]">
+            <label className="block mb-1 text-sm font-semibold text-[#212121] dark:text-white">
               Name
             </label>
             <input
@@ -138,12 +138,12 @@ const SignUp = () => {
               type="text"
               name="displayName"
               placeholder="Enter your name"
-              className="input input-bordered w-full text-sm"
+              className="input input-bordered w-full text-sm dark:bg-[#1A2230] dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm font-semibold text-[#212121]">
+            <label className="block mb-1 text-sm font-semibold text-[#212121] dark:text-white">
               Email
             </label>
             <input
@@ -151,12 +151,12 @@ const SignUp = () => {
               name="email"
               type="email"
               placeholder="Enter your email"
-              className="input input-bordered w-full text-sm"
+              className="input input-bordered w-full text-sm dark:bg-[#1A2230] dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm font-semibold text-[#212121]">
+            <label className="block mb-1 text-sm font-semibold text-[#212121] dark:text-white">
               Photo URL
             </label>
             <input
@@ -164,12 +164,12 @@ const SignUp = () => {
               name="photoURL"
               type="text"
               placeholder="Enter photo URL"
-              className="input input-bordered w-full text-sm"
+              className="input input-bordered w-full text-sm dark:bg-[#1A2230] dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm font-semibold text-[#212121]">
+            <label className="block mb-1 text-sm font-semibold text-[#212121] dark:text-white">
               Password
             </label>
             <div className="flex items-center">
@@ -177,23 +177,23 @@ const SignUp = () => {
                 onChange={(event) => setPassword(event.target.value)}
                 type={!view ? "password" : "text"}
                 name="password"
-                className="input w-full"
+                className="input w-full dark:bg-[#1A2230] dark:text-white"
                 placeholder="Password"
               />
               {view ? (
                 <FaEye
                   onClick={() => setView(!view)}
-                  className="relative cursor-pointer -left-8 text-xl"
-                ></FaEye>
+                  className="relative cursor-pointer -left-8 text-xl text-[#212121] dark:text-white"
+                />
               ) : (
                 <FaEyeSlash
                   onClick={() => setView(!view)}
-                  className="relative cursor-pointer -left-8 text-xl"
-                ></FaEyeSlash>
+                  className="relative cursor-pointer -left-8 text-xl text-[#212121] dark:text-white"
+                />
               )}
             </div>
             {!isPasswordValid && (
-              <p className="text-sm text-red-600">
+              <p className="text-sm text-red-600 dark:text-red-400">
                 Password must contain at least:
                 <br />– one uppercase letter (A–Z)
                 <br />– one lowercase letter (a–z)
@@ -209,7 +209,8 @@ const SignUp = () => {
           >
             Sign Up
           </button>
-          <p className="text-sm text-center text-[#212121] mt-4">
+
+          <p className="text-sm text-center text-[#212121] dark:text-white mt-4">
             Already have an account?{" "}
             <NavLink
               onClick={() => setUserToggle(false)}
@@ -221,12 +222,12 @@ const SignUp = () => {
           </p>
         </form>
 
-        <div className="divider">OR</div>
+        <div className="divider dark:divider-white dark:text-white">OR</div>
 
         <button
           onClick={handleGoogleLogin}
           type="button"
-          className="btn btn-outline w-full flex items-center justify-center gap-2"
+          className="btn btn-outline w-full flex items-center justify-center gap-2 dark:text-white"
         >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"

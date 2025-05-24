@@ -22,7 +22,6 @@ const SignIn = () => {
 
     userLogin(email, password)
       .then((userCredential) => {
-        // sign in sweet alert
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
@@ -68,7 +67,6 @@ const SignIn = () => {
 
     signInWithPopup(auth, provider)
       .then((userCredential) => {
-        // sign in with google sweet alert
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
@@ -106,46 +104,46 @@ const SignIn = () => {
       });
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#212121] mb-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-[#101828] px-4 py-10 dark">
+      <div className="w-full max-w-md bg-white dark:bg-[#0E1A2B] rounded-2xl shadow-lg p-6 sm:p-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#212121] dark:text-white mb-6">
           Login to Your Account
         </h2>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block mb-1 text-sm font-semibold text-[#212121]">
+            <label className="block mb-1 text-sm font-semibold text-[#212121] dark:text-white">
               Email
             </label>
             <input
               name="email"
               type="email"
               placeholder="Enter your email"
-              className="input input-bordered w-full text-sm"
+              className="input input-bordered w-full text-sm dark:bg-[#1A2230] dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm font-semibold text-[#212121]">
+            <label className="block mb-1 text-sm font-semibold text-[#212121] dark:text-white">
               Password
             </label>
             <div className="flex items-center">
               <input
                 type={!view ? "password" : "text"}
                 name="password"
-                className="input w-full"
+                className="input w-full dark:bg-[#1A2230] dark:text-white"
                 placeholder="Password"
               />
               {view ? (
                 <FaEye
                   onClick={() => setView(!view)}
-                  className="relative cursor-pointer -left-8 text-xl"
-                ></FaEye>
+                  className="relative cursor-pointer -left-8 text-xl text-[#212121] dark:text-white"
+                />
               ) : (
                 <FaEyeSlash
                   onClick={() => setView(!view)}
-                  className="relative cursor-pointer -left-8 text-xl"
-                ></FaEyeSlash>
+                  className="relative cursor-pointer -left-8 text-xl text-[#212121] dark:text-white"
+                />
               )}
             </div>
           </div>
@@ -156,7 +154,8 @@ const SignIn = () => {
           >
             Login
           </button>
-          <p className="text-sm text-center text-[#212121] mt-4">
+
+          <p className="text-sm text-center text-[#212121] dark:text-white mt-4">
             Don&apos;t have an account?{" "}
             <NavLink
               onClick={() => setUserToggle(true)}
@@ -168,12 +167,12 @@ const SignIn = () => {
           </p>
         </form>
 
-        <div className="divider">OR</div>
+        <div className="divider dark:divider-white dark:text-white">OR</div>
 
         <button
           onClick={handleGoogleLogin}
           type="button"
-          className="btn btn-outline w-full flex items-center justify-center gap-2"
+          className="btn btn-outline w-full flex items-center justify-center gap-2 dark:text-white"
         >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"

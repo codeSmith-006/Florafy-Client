@@ -31,67 +31,78 @@ const TipsDetails = () => {
       body: JSON.stringify({ totalLiked: totalLiked + 1 }),
     })
       .then((res) => res.json())
-      .then((resData) => {console.log(resData)
+      .then((resData) => {
+        console.log(resData);
         setTotalLiked(data.likeCount);
-        location.reload()
+        location.reload();
       });
   };
-  console.log(data.likeCount)
-
-  // fetching current data
+  console.log(data.likeCount);
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center text-[#38A57E] hover:underline mb-6"
+        className="flex items-center text-[#38A57E] hover:underline mb-6 dark:text-green-400"
       >
         <ArrowLeft className="w-5 h-5 mr-1" />
         Back
       </button>
 
-      <div className="bg-white shadow-xl rounded-xl p-6">
+      <div className="bg-white shadow-xl rounded-xl p-6 dark:bg-gray-900 dark:text-gray-100">
         <img
           src={data.imageUrl}
           alt={data.title}
           className="w-full h-72 object-cover rounded-lg mb-6"
         />
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold text-[#38A57E]">{data.title}</h2>
+          <h2 className="text-3xl font-bold text-[#38A57E] dark:text-green-400">
+            {data.title}
+          </h2>
           <button
             disabled={liked}
             className={`btn btn-sm rounded-full px-3 py-2 
               bg-red-100 text-red-500
-             hover:scale-105 transition`}
+              hover:scale-105 transition dark:bg-red-900 dark:text-red-300`}
             onClick={handleClickLike}
           >
-            <Heart className="w-5 h-5 fill-red-500" />
+            <Heart className="w-5 h-5 fill-red-500 dark:fill-red-400" />
           </button>
         </div>
 
-        <p className="text-sm text-gray-500 mb-1">
-          <span className="font-medium text-gray-700">Category:</span>{" "}
+        <p className="text-sm text-gray-500 mb-1 dark:text-gray-400">
+          <span className="font-medium text-gray-700 dark:text-gray-300">
+            Category:
+          </span>{" "}
           {data.category}
         </p>
-        <p className="text-sm text-gray-500 mb-1">
-          <span className="font-medium text-gray-700">Plant Type:</span>{" "}
+        <p className="text-sm text-gray-500 mb-1 dark:text-gray-400">
+          <span className="font-medium text-gray-700 dark:text-gray-300">
+            Plant Type:
+          </span>{" "}
           {data.plantType}
         </p>
-        <p className="text-sm text-gray-500 mb-1">
-          <span className="font-medium text-gray-700">Difficulty:</span>{" "}
+        <p className="text-sm text-gray-500 mb-1 dark:text-gray-400">
+          <span className="font-medium text-gray-700 dark:text-gray-300">
+            Difficulty:
+          </span>{" "}
           {data.difficulty}
         </p>
-        <p className="text-sm text-gray-500 mb-1">
-          <span className="font-medium text-gray-700">Visibility:</span>{" "}
+        <p className="text-sm text-gray-500 mb-1 dark:text-gray-400">
+          <span className="font-medium text-gray-700 dark:text-gray-300">
+            Visibility:
+          </span>{" "}
           {data.availability}
         </p>
-        <p className="text-sm text-gray-500 mb-4">
-          <span className="font-medium text-gray-700">Author:</span> {data.name}{" "}
-          ({data.email})
+        <p className="text-sm text-gray-500 mb-4 dark:text-gray-400">
+          <span className="font-medium text-gray-700 dark:text-gray-300">
+            Author:
+          </span>{" "}
+          {data.name} ({data.email})
         </p>
 
-        <div className="bg-[#f8fefc] border border-[#38A57E]/20 p-5 rounded-lg text-gray-700 leading-relaxed">
+        <div className="bg-[#f8fefc] border border-[#38A57E]/20 p-5 rounded-lg text-gray-700 leading-relaxed dark:bg-gray-800 dark:border-green-700 dark:text-gray-300">
           {data.description}
         </div>
       </div>

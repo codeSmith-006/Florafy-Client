@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 const MyTipsCard = ({ rawTip, setDeletedTips }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [tip, setTips] = useState(rawTip);
-  console.log(tip)
+
   useEffect(() => {
     setTips(rawTip);
   }, [rawTip]);
@@ -23,16 +23,15 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
       },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(dataResponse => {console.log(dataResponse)
-      const updatedData = {
-        _id: tip._id,
-        ...data
-      }
-      console.log(updatedData)
-      setTips(updatedData)
-      setActiveModal(false)
-    })
+      .then(res => res.json())
+      .then(dataResponse => {
+        const updatedData = {
+          _id: tip._id,
+          ...data
+        };
+        setTips(updatedData);
+        setActiveModal(false);
+      });
   };
 
   const handleDelete = () => {
@@ -53,89 +52,69 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
           },
         })
           .then((res) => res.json())
-          .then((data) => console.log(data));
-        setDeletedTips(rawTip);
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+          .then(() => {
+            setDeletedTips(rawTip);
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          });
       }
     });
   };
 
-
-  // const handleEdit = async () => {
-  //   try {
-  //     const response = await fetch(`http://localhost:5000/gardeners-tips/update/${tip._id}`, {
-  //       method: "PATCH",
-  //       headers: {
-  //         "Content-Type": 'application/json'
-  //       },
-  //       body: JSON.stringify(updatedData)
-  //     })
-  //     const data = await response.json();
-  //     console.log(data)
-  //     if (data.modifiedCount) {
-  //       setTips(updatedData)
-  //       setActiveModal(false)
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   return (
-    <tr key={tip._id} className="hover:bg-green-100">
+    <tr key={tip._id} className="hover:bg-green-100 dark:hover:bg-green-900">
       {activeModal && (
         <dialog
           id="update_modal"
           className="modal modal-bottom sm:modal-middle"
           open
         >
-          <div className="modal-box">
-            <h3 className="font-bold text-lg text-green-700 mb-4">
+          <div className="modal-box dark:bg-gray-900 dark:text-white">
+            <h3 className="font-bold text-lg text-green-700 dark:text-green-400 mb-4">
               Update Garden Tip
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Title */}
               <div>
-                <label className="label font-medium text-green-700">
+                <label className="label font-medium text-green-700 dark:text-green-300">
                   Title (e.g., “How I Grow Tomatoes Indoors”)
                 </label>
                 <input
                   name="title"
                   type="text"
                   defaultValue={tip?.title}
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full dark:bg-gray-800 dark:text-white"
                   required
                 />
               </div>
 
               {/* Plant Type / Topic */}
               <div>
-                <label className="label font-medium text-green-700">
+                <label className="label font-medium text-green-700 dark:text-green-300">
                   Plant Type / Topic
                 </label>
                 <input
                   name="plantType"
                   type="text"
                   defaultValue={tip?.plantType}
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full dark:bg-gray-800 dark:text-white"
                   required
                 />
               </div>
 
               {/* Difficulty */}
               <div>
-                <label className="label font-medium text-green-700">
+                <label className="label font-medium text-green-700 dark:text-green-300">
                   Difficulty Level
                 </label>
                 <select
                   name="difficulty"
                   defaultValue={tip?.difficulty}
-                  className="select select-bordered w-full"
+                  className="select select-bordered w-full dark:bg-gray-800 dark:text-white"
                   required
                 >
                   <option value="">Select</option>
@@ -147,13 +126,13 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
 
               {/* Description */}
               <div>
-                <label className="label font-medium text-green-700">
+                <label className="label font-medium text-green-700 dark:text-green-300">
                   Description
                 </label>
                 <textarea
                   name="description"
                   defaultValue={tip?.description}
-                  className="textarea textarea-bordered w-full"
+                  className="textarea textarea-bordered w-full dark:bg-gray-800 dark:text-white"
                   rows={3}
                   required
                 />
@@ -161,26 +140,26 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
 
               {/* Image URL */}
               <div>
-                <label className="label font-medium text-green-700">
+                <label className="label font-medium text-green-700 dark:text-green-300">
                   Image URL
                 </label>
                 <input
                   name="imageUrl"
                   type="text"
                   defaultValue={tip?.imageUrl}
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full dark:bg-gray-800 dark:text-white"
                 />
               </div>
 
               {/* Category */}
               <div>
-                <label className="label font-medium text-green-700">
+                <label className="label font-medium text-green-700 dark:text-green-300">
                   Category
                 </label>
                 <select
                   name="category"
                   defaultValue={tip?.category}
-                  className="select select-bordered w-full"
+                  className="select select-bordered w-full dark:bg-gray-800 dark:text-white"
                   required
                 >
                   <option value="">Select</option>
@@ -194,13 +173,13 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
 
               {/* Availability */}
               <div>
-                <label className="label font-medium text-green-700">
+                <label className="label font-medium text-green-700 dark:text-green-300">
                   Availability
                 </label>
                 <select
                   name="availability"
                   defaultValue={tip?.availability}
-                  className="select select-bordered w-full"
+                  className="select select-bordered w-full dark:bg-gray-800 dark:text-white"
                   required
                 >
                   <option value="">Select</option>
@@ -212,34 +191,34 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
               {/* User Info (Read Only) */}
               <div className="flex gap-4">
                 <div className="flex-1">
-                  <label className="label font-medium text-green-700">
+                  <label className="label font-medium text-green-700 dark:text-green-300">
                     User Name
                   </label>
                   <input
                     type="text"
                     name="name"
                     value={tip?.name}
-                    className="input input-bordered w-full bg-gray-100 text-gray-600"
+                    readOnly
+                    className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-600"
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="label font-medium text-green-700">
+                  <label className="label font-medium text-green-700 dark:text-green-300">
                     User Email
                   </label>
                   <input
                     type="text"
                     name="email"
                     value={tip?.email}
-                    className="input input-bordered w-full bg-gray-100 text-gray-600"
+                    readOnly
+                    className="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-600"
                   />
                 </div>
               </div>
 
               {/* Buttons */}
               <div className="modal-action mt-6">
-                <button type="submit"
-                  className="btn btn-success text-white"
-                >
+                <button type="submit" className="btn btn-success text-white">
                   Update
                 </button>
                 <button
@@ -254,24 +233,23 @@ const MyTipsCard = ({ rawTip, setDeletedTips }) => {
           </div>
         </dialog>
       )}
-      <td className="px-4 py-2">{tip.title}</td>
-      <td className="px-4 py-2">{tip.plantType}</td>
-      <td className="px-4 py-2">{tip.difficulty}</td>
-      <td className="px-4 py-2">
-        <td className="px-4 py-2">{tip.availability}</td>
-      </td>
+
+      <td className="px-4 py-2 dark:text-white">{tip.title}</td>
+      <td className="px-4 py-2 dark:text-white">{tip.plantType}</td>
+      <td className="px-4 py-2 dark:text-white">{tip.difficulty}</td>
+      <td className="px-4 py-2 dark:text-white">{tip.availability}</td>
       <td className="px-4 py-2 text-center">
         <div className="flex justify-center gap-3">
           <button
             onClick={() => setActiveModal(!activeModal)}
-            className="text-blue-600 hover:text-blue-800 transition"
+            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition"
             title="Edit Tip"
           >
             <Pencil className="w-5 h-5 cursor-pointer" />
           </button>
           <button
             onClick={handleDelete}
-            className="text-red-600 hover:text-red-800 transition"
+            className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 transition"
             title="Delete Tip"
           >
             <Trash2 className="w-5 h-5 cursor-pointer" />

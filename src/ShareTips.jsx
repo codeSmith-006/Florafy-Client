@@ -16,7 +16,7 @@ const ShareTips = () => {
     const newData = {
       ...data,
       email,
-      name
+      name,
     };
 
     fetch("http://localhost:5000/gardeners-tips", {
@@ -50,39 +50,45 @@ const ShareTips = () => {
       });
   };
   return (
-    <div className="max-w-lg mx-auto my-8 w-[95%] bg-white p-8 rounded-lg shadow-md border border-gray-200">
-      <h2 className="text-3xl font-bold mb-6 text-[#38A57E] text-center">
+    <div className="max-w-lg mx-auto my-8 w-[95%] bg-white dark:bg-[#0E1A2B] p-8 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+      <h2 className="text-3xl font-bold mb-6 text-[#38A57E] text-center dark:text-[#38A57E]">
         Share a Garden Tip
       </h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block font-semibold mb-1">Title</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            Title
+          </label>
           <input
             type="text"
             name="title"
             placeholder="How I Grow Tomatoes Indoors"
             required
-            className="input input-bordered w-full"
+            className="input input-bordered w-full text-sm dark:bg-[#1A2230] dark:text-white"
           />
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Plant Type / Topic</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            Plant Type / Topic
+          </label>
           <input
             type="text"
             name="plantType"
             placeholder="Tomatoes, Herbs, Succulents..."
             required
-            className="input input-bordered w-full"
+            className="input input-bordered w-full text-sm dark:bg-[#1A2230] dark:text-white"
           />
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Difficulty Level</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            Difficulty Level
+          </label>
           <select
             name="difficulty"
             required
-            className="select select-bordered w-full"
+            className="select select-bordered w-full dark:bg-[#1A2230] dark:text-white"
           >
             <option value="" disabled>
               Select difficulty
@@ -94,32 +100,38 @@ const ShareTips = () => {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Description</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            Description
+          </label>
           <textarea
             name="description"
             rows={4}
             placeholder="Describe your tip here..."
             required
-            className="textarea textarea-bordered w-full"
+            className="textarea textarea-bordered w-full text-sm dark:bg-[#1A2230] dark:text-white"
           />
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Image URL</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            Image URL
+          </label>
           <input
             type="url"
             name="imageUrl"
             placeholder="https://example.com/image.jpg"
-            className="input input-bordered w-full"
+            className="input input-bordered w-full text-sm dark:bg-[#1A2230] dark:text-white"
           />
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Category</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            Category
+          </label>
           <select
             name="category"
             required
-            className="select select-bordered w-full"
+            className="select select-bordered w-full dark:bg-[#1A2230] dark:text-white"
           >
             <option value="" disabled>
               Select category
@@ -133,11 +145,13 @@ const ShareTips = () => {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Availability</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            Availability
+          </label>
           <select
             name="availability"
             required
-            className="select select-bordered w-full"
+            className="select select-bordered w-full dark:bg-[#1A2230] dark:text-white"
           >
             <option value="" disabled>
               Select availability
@@ -148,24 +162,28 @@ const ShareTips = () => {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">User Email</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            User Email
+          </label>
           <input
             value={loggedUser?.email}
             name="email"
             type="email"
             readOnly
-            className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+            className="input input-bordered w-full bg-gray-100 dark:bg-[#1A2230] dark:text-white cursor-not-allowed"
           />
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">User Name</label>
+          <label className="block font-semibold mb-1 text-[#212121] dark:text-white">
+            User Name
+          </label>
           <input
-          name="name"
+            name="name"
             value={loggedUser?.displayName}
             type="text"
             readOnly
-            className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+            className="input input-bordered w-full bg-gray-100 dark:bg-[#1A2230] dark:text-white cursor-not-allowed"
           />
         </div>
 
