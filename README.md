@@ -1,12 +1,25 @@
-# React + Vite
+# 🌿 GardenGenius — Gardening Community & Resource Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 **Live Site:** https://assignment-604fb.web.app/
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Features
 
-## Expanding the ESLint configuration
+- 🔐 **Authentication System**: Secure login and registration with Email/Password and Google via Firebase.
+- 🌱 **Community Garden Tips**: Share, edit, and manage personalized gardening tips (CRUD functionality).
+- 🎨 **Dark & Light Mode**: Seamless theme toggle for user comfort.
+- 🌍 **Explore Gardeners**: Discover featured gardeners with their best tips and images.
+- 📊 **Trending Tips Section**: Showcases the most liked gardening tips.
+- 🧠 **Smart Filtering**: Filter tips by plant type, category, difficulty, and availability.
+- 🎞️ **Interactive UI**: Smooth animations with Lottie files and typewriter effects for engaging UX.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📘 Project Description
+
+**GardenGenius** is a vibrant web application designed for gardening enthusiasts to connect, share, and learn from one another. Whether you're growing tomatoes on your windowsill or building compost in your backyard, GardenGenius provides a platform to post tips, discover trending ideas, and explore profiles of passionate gardeners. With Firebase authentication, dynamic CRUD features, and a clean, responsive UI, this platform is built to inspire and inform both beginner and expert gardeners alike.
+
+---
+
+🚀 _Built with React, Tailwind CSS, Firebase, and passion for plants!_
