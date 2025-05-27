@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Lily Green",
+    "photo": "/images/gardeners/lily.jpg",
+    "location": "New York, USA",
+    "bio": "Passionate about urban gardening and balcony plants.",
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "Rajesh Kumar",
+    "photo": "/images/gardeners/rajesh.jpg",
+    "location": "Mumbai, India",
+    "bio": "Expert in hydroponics and indoor plants.",
+    "active": true
+  },
+  {
+    "id": 3,
+    "name": "Maya Lopez",
+    "photo": "/images/gardeners/maya.jpg",
+    "location": "Mexico City, Mexico",
+    "bio": "Loves composting and organic gardening.",
+    "active": false
+  },
+  {
+    "id": 4,
+    "name": "Oliver Smith",
+    "photo": "/images/gardeners/oliver.jpg",
+    "location": "London, UK",
+    "bio": "Specializes in vertical gardens and green walls.",
+    "active": true
+  },
+  {
+    "id": 5,
+    "name": "Sofia Petrova",
+    "photo": "/images/gardeners/sofia.jpg",
+    "location": "Moscow, Russia",
+    "bio": "Focus on sustainable gardening techniques.",
+    "active": false
+  },
+  {
+    "id": 6,
+    "name": "Daniel Kim",
+    "photo": "/images/gardeners/daniel.jpg",
+    "location": "Seoul, South Korea",
+    "bio": "Enjoys bonsai and miniature gardening.",
+    "active": true
+  },
+  {
+    "id": 7,
+    "name": "Emma Johnson",
+    "photo": "/images/gardeners/emma.jpg",
+    "location": "Sydney, Australia",
+    "bio": "Loves community gardening and workshops.",
+    "active": true
+  },
+  {
+    "id": 8,
+    "name": "Mohamed Ali",
+    "photo": "/images/gardeners/mohamed.jpg",
+    "location": "Cairo, Egypt",
+    "bio": "Expert in desert plants and xeriscaping.",
+    "active": false
+  },
+  {
+    "id": 9,
+    "name": "Chloe Martin",
+    "photo": "/images/gardeners/chloe.jpg",
+    "location": "Paris, France",
+    "bio": "Passionate about flower gardening and pollinators.",
+    "active": true
+  },
+  {
+    "id": 10,
+    "name": "Juan Carlos",
+    "photo": "/images/gardeners/juan.jpg",
+    "location": "Bogotá, Colombia",
+    "bio": "Focus on edible gardens and local plants.",
+    "active": false
+  }
+]
